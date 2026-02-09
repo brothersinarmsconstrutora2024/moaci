@@ -1,0 +1,440 @@
+/* ===== RESET CSS ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== VARIÁVEIS ===== */
+:root {
+  --primary: #1a2e4f;
+  --accent: #c5a059;
+  --bg: #f5f5f5;
+  --text: #333;
+  --white: #fff;
+}
+
+/* ===== BASE ===== */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.45);
+  color: var(--white);
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.hero h2 {
+  font-weight: 300;
+  max-width: 700px;
+  color: var(--white);
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+}
+
+/* ===== CTA BOTÃO ===== */
+.cta-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #000;
+  padding: 1rem 2.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cta-btn:hover {
+  background: #b08c3e;
+  transform: translateY(-2px);
+}
+
+.cta-btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.cta-btn-secondary:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* ===== DIFERENCIAIS ===== */
+.features {
+  display: flex;
+  gap: 2rem;
+  padding: 4rem 10%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  flex: 1 1 280px;
+  max-width: 350px;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+}
+
+.feature h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+/* ===== GALERIA ===== */
+.gallery {
+  padding: 4rem 10%;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* ===== FICHA TÉCNICA ===== */
+.details {
+  padding: 4rem 10%;
+}
+
+.details ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.details li {
+  margin: 0.8rem 0;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* ===== DEPOIMENTOS ===== */
+.testimonials {
+  text-align: center;
+  padding: 4rem 10%;
+  background: var(--white);
+}
+
+.testimonials h2 {
+  color: var(--primary);
+}
+
+.testimonial {
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background: var(--bg);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent);
+}
+
+.testimonial p {
+  font-style: italic;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ===== FORMULÁRIO DE CONTATO ===== */
+.contact-form {
+  background: var(--primary);
+  color: var(--white);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.contact-form h2 {
+  color: var(--white);
+}
+
+.contact-form p {
+  margin-bottom: 1.5rem;
+}
+
+.contact-form form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-form label {
+  display: block;
+  margin-top: 1rem;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: none;
+  height: 90px;
+}
+
+.contact-form .consent {
+  margin-top: 1.2rem;
+  text-align: left;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.contact-form .consent input[type="checkbox"] {
+  margin-top: 4px;
+  width: auto;
+}
+
+.contact-form .consent label {
+  margin-top: 0;
+  display: inline;
+}
+
+.contact-form .consent a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.contact-form .cta-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+footer p {
+  margin: 0.4rem 0;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== WHATSAPP FLUTUANTE ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: bounce 1.5s infinite;
+}
+
+.whatsapp-float img {
+  width: 60px;
+  height: 60px;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ===== PÁGINA DE CONFIRMAÇÃO ===== */
+.confirmation-page {
+  text-align: center;
+  padding: 4rem 2rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-page h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.confirmation-page p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== PÁGINA DE POLÍTICA ===== */
+.policy-header {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.policy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.policy-content section {
+  margin-bottom: 2rem;
+}
+
+.policy-content h2 {
+  text-align: left;
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.policy-content ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.policy-content li {
+  margin: 0.3rem 0;
+}
+
+.policy-content a {
+  color: var(--accent);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero h2 {
+    font-size: 1rem;
+  }
+
+  .hero-bg img {
+    height: 60vh;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 5%;
+  }
+
+  .feature {
+    max-width: 100%;
+  }
+
+  .gallery {
+    padding: 2rem 5%;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details {
+    padding: 2rem 5%;
+  }
+
+  .testimonials {
+    padding: 2rem 5%;
+  }
+
+  .contact-form {
+    padding: 2rem 1rem;
+  }
+
+  .contact-form form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .hero h2 {
+    font-size: 0.9rem;
+  }
+
+  .cta-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
