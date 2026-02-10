@@ -133,19 +133,26 @@ h2 {
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
 }
 
-.gallery img {
+.gallery-grid img {
+  flex: 0 1 calc(33.333% - 0.67rem);
+  min-width: 250px;
+}
+
+.gallery-grid img {
   width: 100%;
   border-radius: 8px;
   cursor: pointer;
+  object-fit: cover;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery img:hover {
+.gallery-grid img:hover {
   transform: scale(1.03);
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
@@ -403,8 +410,8 @@ footer a:hover {
     padding: 2rem 5%;
   }
 
-  .gallery-grid {
-    grid-template-columns: 1fr;
+  .gallery-grid img {
+    flex: 0 1 100%;
   }
 
   .details {
