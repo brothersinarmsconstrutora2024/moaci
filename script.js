@@ -81,10 +81,12 @@ document.addEventListener("DOMContentLoaded", function () {
           if (whatsappFloat) whatsappFloat.style.display = "none";
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          throw new Error(data.message || "Erro ao enviar");
+          const msg = data.message || (response.status === 404 ? "API não encontrada. Faça um novo deploy no Vercel (a pasta api deve estar na raiz)." : "Erro ao enviar");
+          throw new Error(msg);
         }
       } catch (err) {
-        alert("Ocorreu um erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.");
+        const msg = err.message || "Ocorreu um erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.";
+        alert(msg);
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
       }
