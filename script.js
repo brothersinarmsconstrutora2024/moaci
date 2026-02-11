@@ -54,15 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
       try {
         const formData = new FormData(form);
-        const response = await fetch("https://formsubmit.co/ajax/residencialmoaci@gmail.com", {
+        const dataObj = Object.fromEntries(formData.entries());
+        const response = await fetch("/api/submit-form", {
           method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" }
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataObj)
         });
 
         const data = await response.json().catch(() => ({}));
 
-        if (response.ok && (data.success === true || data.success === "true")) {
+        if (response.ok && data.success === true) {
           if (typeof gtag === "function") {
             gtag("event", "generate_lead", {
               event_category: "Formulário",
