@@ -61,7 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
           body: JSON.stringify(dataObj)
         });
 
-        const data = await response.json().catch(() => ({}));
+        let data = {};
+        try {
+          const text = await response.text();
+          data = text ? JSON.parse(text) : {};
+        } catch (_) {
+          data = { message: "Resposta inválida do servidor" };
+        }
 
         if (response.ok && data.success === true) {
           if (typeof gtag === "function") {
