@@ -19,6 +19,15 @@ module.exports = async function handler(req, res) {
 
   try {
     let body = req.body;
+    if (!body || (typeof body === "object" && Object.keys(body).length === 0)) {
+      if (typeof req.json === "function") {
+        try {
+          body = await req.json();
+        } catch (e) {
+          body = {};
+        }
+      }
+    }
     if (typeof body === "string") {
       try {
         body = JSON.parse(body);
