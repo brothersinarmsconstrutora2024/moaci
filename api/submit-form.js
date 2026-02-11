@@ -2,7 +2,7 @@
  * Vercel Serverless Function - Proxy para FormSubmit
  * Evita problemas de CORS fazendo a requisição do servidor
  */
-const FORMSUBMIT_URL = "https://formsubmit.co/ajax/residencialmoaci@gmail.com";
+const FORMSUBMIT_URL = "https://formsubmit.co/ajax/brothersinarmsconstrutora@gmail.com";
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
