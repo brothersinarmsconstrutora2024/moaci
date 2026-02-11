@@ -9,53 +9,95 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ===== VALIDAÇÃO DO FORMULÁRIO =====
+// ===== FORMULÁRIO DE CONTATO (AJAX + SEÇÃO DE AGRADECIMENTO) =====
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("#contact-form");
+  const mainContent = document.querySelector("#main-content");
+  const thankYouSection = document.querySelector("#thank-you-section");
+  const thankYouBtn = document.querySelector(".thank-you-btn");
 
   if (form) {
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
       const name = document.querySelector("#name").value.trim();
       const email = document.querySelector("#email").value.trim();
       const phone = document.querySelector("#phone").value.trim();
       const consent = document.querySelector("#consent").checked;
 
       if (!name || !email || !phone) {
-        event.preventDefault();
         alert("Por favor, preencha todos os campos obrigatórios.");
         return;
       }
 
       if (!consent) {
-        event.preventDefault();
         alert("Você precisa aceitar a Política de Privacidade para prosseguir.");
         return;
       }
 
-      // Validação de e-mail simples
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        event.preventDefault();
         alert("Por favor, insira um e-mail válido.");
         return;
       }
 
-      // Validação de telefone (mínimo 10 dígitos)
       const phoneDigits = phone.replace(/\D/g, "");
       if (phoneDigits.length < 10) {
-        event.preventDefault();
         alert("Por favor, insira um telefone válido com DDD.");
         return;
       }
 
-      // Se tudo ok, o formulário é enviado normalmente para o FormSubmit.co
-      // Registrar evento no Google Analytics
-      if (typeof gtag === "function") {
-        gtag("event", "generate_lead", {
-          event_category: "Formulário",
-          event_label: "Lead Planalto Paulista"
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando...";
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch("https://formsubmit.co/ajax/residencialmoaci@gmail.com", {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" }
         });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && (data.success === true || data.success === "true")) {
+          if (typeof gtag === "function") {
+            gtag("event", "generate_lead", {
+              event_category: "Formulário",
+              event_label: "Lead Planalto Paulista"
+            });
+          }
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          if (mainContent) mainContent.classList.add("hidden");
+          if (thankYouSection) {
+            thankYouSection.classList.add("visible");
+            thankYouSection.setAttribute("aria-hidden", "false");
+          }
+          const whatsappFloat = document.querySelector(".whatsapp-float");
+          if (whatsappFloat) whatsappFloat.style.display = "none";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          throw new Error(data.message || "Erro ao enviar");
+        }
+      } catch (err) {
+        alert("Ocorreu um erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
       }
+    });
+  }
+
+  if (thankYouBtn && mainContent && thankYouSection) {
+    thankYouBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      mainContent.classList.remove("hidden");
+      thankYouSection.classList.remove("visible");
+      thankYouSection.setAttribute("aria-hidden", "true");
+      const whatsappFloat = document.querySelector(".whatsapp-float");
+      if (whatsappFloat) whatsappFloat.style.display = "";
     });
   }
 });
