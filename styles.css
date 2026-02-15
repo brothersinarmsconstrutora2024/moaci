@@ -321,66 +321,6 @@ footer a:hover {
   }
 }
 
-/* ===== SEÇÃO DE AGRADECIMENTO (na própria landing) ===== */
-.thank-you-section {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.thank-you-section.visible {
-  display: flex;
-}
-
-.thank-you-bg {
-  position: absolute;
-  inset: 0;
-}
-
-.thank-you-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.thank-you-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.45);
-  z-index: 2;
-  padding: 2rem;
-}
-
-.thank-you-message {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--white);
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-  margin-bottom: 2rem;
-  line-height: 1.4;
-  max-width: 90%;
-  text-align: center;
-}
-
-#main-content.hidden {
-  display: none !important;
-}
-
-@media (max-width: 768px) {
-  .thank-you-message {
-    font-size: 1.3rem;
-  }
-}
-
 /* ===== PÁGINA DE CONFIRMAÇÃO ===== */
 .confirmation-page {
   text-align: center;
