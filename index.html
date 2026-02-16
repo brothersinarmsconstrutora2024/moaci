@@ -140,6 +140,10 @@
     <label for="message">Disponibilidade para visita</label>
     <textarea id="message" name="message" rows="3" placeholder="Ex: Segundas à tarde, quartas pela manhã"></textarea>
 
+    <!-- FormSubmit: URL da página (recomendado para sites estáticos) -->
+    <input type="hidden" name="_url" value="https://moaci.vercel.app">
+    <!-- FormSubmit: redirecionar de volta à nossa página após envio -->
+    <input type="hidden" name="_next" value="https://moaci.vercel.app/?obrigado=1">
     <!-- FormSubmit: desativar CAPTCHA padrão -->
     <input type="hidden" name="_captcha" value="false">
     <!-- FormSubmit: assunto do e-mail -->
