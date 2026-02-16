@@ -49,6 +49,9 @@
 
 <body>
 
+<!-- WRAPPER DO CONTEÚDO PRINCIPAL (para ocultar ao mostrar agradecimento) -->
+<div id="main-content">
+
 <!-- HERO -->
 <header class="hero">
   <div class="hero-bg">
@@ -115,7 +118,7 @@
     <p>"A reforma ficou impecável! Cada detalhe foi pensado com muito cuidado. Recomendo demais." — Roberto M.</p>
   </div>
   <div class="testimonial">
-    <p>"Atendimento excelente e obra entregue no prazo. Superou nossas expectativas." — Fernanda L.</p>
+    <p>"Atendimento excelente. Superou nossas expectativas." — Fernanda L.</p>
   </div>
 </section>
 
@@ -137,8 +140,6 @@
     <label for="message">Disponibilidade para visita</label>
     <textarea id="message" name="message" rows="3" placeholder="Ex: Segundas à tarde, quartas pela manhã"></textarea>
 
-    <!-- FormSubmit: redirecionar para página de confirmação -->
-    <input type="hidden" name="_next" value="pagina-confirmacao.html">
     <!-- FormSubmit: desativar CAPTCHA padrão -->
     <input type="hidden" name="_captcha" value="false">
     <!-- FormSubmit: assunto do e-mail -->
@@ -155,18 +156,33 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2025 | Imóvel Residencial – Planalto Paulista – São Paulo</p>
+  <p>&copy; 2026 | Imóvel Residencial – Planalto Paulista – São Paulo</p>
   <p>
-    <a href="https://wa.me/5511986723965">WhatsApp</a> |
+    <a href="https://wa.me/5511916220021">WhatsApp</a> |
     <a href="mailto:brothersinarmsconstrutora@gmail.com">E-mail</a> |
     <a href="politica.html">Política de Privacidade</a>
   </p>
 </footer>
 
+</div><!-- fim #main-content -->
+
+<!-- SEÇÃO DE AGRADECIMENTO (oculta inicialmente) -->
+<section id="thank-you-section" class="thank-you-section" aria-hidden="true">
+  <div class="thank-you-bg">
+    <img src="images/fachada.jpg" alt="Fachada da casa">
+  </div>
+  <div class="thank-you-content">
+    <p class="thank-you-message">Agradecemos o interesse, entraremos em contato em breve!</p>
+    <a href="#" class="cta-btn thank-you-btn">Voltar</a>
+  </div>
+</section>
+
 <!-- WHATSAPP FLUTUANTE -->
-<a href="https://wa.me/5511986723965" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/5511916220021" class="whatsapp-float" target="_blank">
   <img src="images/whatsapp-icon.png" alt="WhatsApp">
 </a>
 
 </body>
 </html>
+
+
