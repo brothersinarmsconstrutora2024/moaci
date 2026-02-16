@@ -9,93 +9,66 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ===== FORMULÁRIO DE CONTATO (AJAX + SEÇÃO DE AGRADECIMENTO) =====
+// ===== FORMULÁRIO DE CONTATO (ENVIO DIRETO FORMSUBMIT + SEÇÃO AGRADECIMENTO) =====
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("#contact-form");
   const mainContent = document.querySelector("#main-content");
   const thankYouSection = document.querySelector("#thank-you-section");
   const thankYouBtn = document.querySelector(".thank-you-btn");
 
-  if (form) {
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
+  // Mostrar seção de agradecimento se veio do redirecionamento do FormSubmit
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("obrigado") === "1") {
+    if (mainContent) mainContent.classList.add("hidden");
+    if (thankYouSection) {
+      thankYouSection.classList.add("visible");
+      thankYouSection.setAttribute("aria-hidden", "false");
+    }
+    const w = document.querySelector(".whatsapp-float");
+    if (w) w.style.display = "none";
+    window.history.replaceState({}, "", window.location.pathname);
+  }
 
+  if (form) {
+    form.addEventListener("submit", function (event) {
       const name = document.querySelector("#name").value.trim();
       const email = document.querySelector("#email").value.trim();
       const phone = document.querySelector("#phone").value.trim();
       const consent = document.querySelector("#consent").checked;
 
       if (!name || !email || !phone) {
+        event.preventDefault();
         alert("Por favor, preencha todos os campos obrigatórios.");
         return;
       }
 
       if (!consent) {
+        event.preventDefault();
         alert("Você precisa aceitar a Política de Privacidade para prosseguir.");
         return;
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
+        event.preventDefault();
         alert("Por favor, insira um e-mail válido.");
         return;
       }
 
       const phoneDigits = phone.replace(/\D/g, "");
       if (phoneDigits.length < 10) {
+        event.preventDefault();
         alert("Por favor, insira um telefone válido com DDD.");
         return;
       }
 
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Enviando...";
-
-      try {
-        const formData = new FormData(form);
-        const dataObj = Object.fromEntries(formData.entries());
-        const response = await fetch("/api/submit-form", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dataObj)
+      if (typeof gtag === "function") {
+        gtag("event", "generate_lead", {
+          event_category: "Formulário",
+          event_label: "Lead Planalto Paulista"
         });
-
-        let data = {};
-        try {
-          const text = await response.text();
-          data = text ? JSON.parse(text) : {};
-        } catch (_) {
-          data = { message: "Resposta inválida do servidor" };
-        }
-
-        if (response.ok && data.success === true) {
-          if (typeof gtag === "function") {
-            gtag("event", "generate_lead", {
-              event_category: "Formulário",
-              event_label: "Lead Planalto Paulista"
-            });
-          }
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-          if (mainContent) mainContent.classList.add("hidden");
-          if (thankYouSection) {
-            thankYouSection.classList.add("visible");
-            thankYouSection.setAttribute("aria-hidden", "false");
-          }
-          const whatsappFloat = document.querySelector(".whatsapp-float");
-          if (whatsappFloat) whatsappFloat.style.display = "none";
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-          const msg = data.message || (response.status === 404 ? "API não encontrada. Faça um novo deploy no Vercel (a pasta api deve estar na raiz)." : "Erro ao enviar");
-          throw new Error(msg);
-        }
-      } catch (err) {
-        const msg = err.message || "Ocorreu um erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.";
-        alert(msg);
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
       }
+      // Validação OK - deixa o form fazer POST direto para FormSubmit (sem preventDefault)
     });
   }
 
